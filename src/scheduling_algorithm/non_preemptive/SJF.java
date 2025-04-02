@@ -1,8 +1,19 @@
-import java.io.*;
-import java.util.*;
+package scheduling_algorithm.non_preemptive;
 
-public class Main {
-    static double[] scheduling(int n,int process[][]) {
+import scheduling_algorithm.ScheduleStrategy;
+
+import java.util.Comparator;
+import java.util.PriorityQueue;
+
+public class SJF implements ScheduleStrategy {
+
+    String name="SJF";
+
+    public String getName(){
+        return name;
+    }
+
+    public double[] scheduling(int n, int[][] process){
         double matrix[]=new double[3];
 
         //스케줄링 알고리즘을 구현
@@ -14,7 +25,7 @@ public class Main {
         int waitTime[]=new int[n];
         int turnaroundTime[]=new int[n];
 
-        PriorityQueue<int[]>q=new PriorityQueue<>(Comparator.comparingInt(a->a[1]));
+        PriorityQueue<int[]> q=new PriorityQueue<>(Comparator.comparingInt(a->a[1]));
         for(int i=0;i<n;i++){
             if(currentTime>=process[i][0]){
                 q.add(new int[]{process[i][0],process[i][1]});
@@ -45,29 +56,5 @@ public class Main {
         matrix[2]=(double)totalTurnaround/n;
 
         return matrix;
-    }
-
-    public static void main(String[] args) throws IOException {
-        BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(System.out));
-
-        System.out.print("Process 갯수 입력: ");
-        StringTokenizer st = new StringTokenizer(br.readLine());
-        int n = Integer.parseInt(st.nextToken());
-        int process[][]=new int[n][2];
-        for(int i=0;i<n;i++){
-            System.out.print("Process 도착시간과 작업시간 입력: ");
-            StringTokenizer stt=new StringTokenizer(br.readLine()); // 도착시간과 작업시간을 입력
-            process[i][0]=Integer.parseInt(stt.nextToken());
-            process[i][1]=Integer.parseInt(stt.nextToken());
-        }
-
-        double result[]=scheduling(n,process);
-        bw.write("평균 대기시간 : "+result[0]+"\n");
-        bw.write("평균 응답시간 : "+result[1]+"\n");
-        bw.write("평균 반환시간 : "+result[2]);
-
-        bw.flush();
-        bw.close();
     }
 }
