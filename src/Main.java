@@ -1,5 +1,6 @@
 import scheduling_algorithm.Schedule;
 import scheduling_algorithm.non_preemptive.FCFS;
+import scheduling_algorithm.preemptive.RoundRobin;
 
 import java.util.Scanner;
 import java.util.StringTokenizer;
@@ -12,7 +13,7 @@ public class Main {
         String schedulingName=s.nextLine();
 
         Schedule sc=new Schedule(schedulingName);
-        sc.setSchedule(new FCFS()); // 사용할 스케줄링
+        sc.setSchedule(new RoundRobin()); // 사용할 스케줄링
 
         System.out.print("Process 갯수 입력: ");
         int n=s.nextInt();
