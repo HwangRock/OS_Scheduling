@@ -1,4 +1,6 @@
-package transition_algorithm;
+package transition_algorithm.matrix;
+
+import transition_algorithm.TransitionStrategy;
 
 public abstract class Decorator implements TransitionStrategy {
     protected final TransitionStrategy strategy;
